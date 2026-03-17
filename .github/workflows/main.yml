@@ -1,0 +1,25 @@
+name: Sync Mentor Code
+on:
+  schedule:
+    - cron: '0 0 * * *' # Оновлення щоночі
+  workflow_dispatch:      # Кнопка для ручного запуску
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Merge Changes
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git remote add upstream https://github.com/b7sj3o/javarush-lessons.git
+          git fetch upstream
+          git checkout main
+          git merge upstream/main --allow-unrelated-histories -m "Auto-sync from mentor"
+          git push origin main
