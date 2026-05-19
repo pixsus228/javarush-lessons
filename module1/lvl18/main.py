@@ -1,28 +1,41 @@
-# file = open("info.txt", "w")
-# file.write("Hello World!")
+
+
+#
+# file = open("data.txt", "")
+#
+# # for i in range(1, 11):
+# #     file.write(f"Player {i}\n")
+#
+# print(file.read())
+#
 # file.close()
+#
+# exit(1)
+
+
 #
 # file = open("info.txt", "a")
 # file.write("\nNew text!")
 # file.close()
 
 
-def read_file():
-    file = open("info.txt", "r", encoding="utf-8")
-    for line in file.readlines():
-        yield line
-    file.close()
-def read_file2():
-    file = open("info.txt", "r", encoding="utf-8")
-    line = file.readline()
-    while line:
-        line = file.readline()
-        yield line
-def read_file3():
-    file = open("info.txt", "r", encoding="utf-8")
 
-    while line := file.readline():
-        print(repr(line))
+# def read_file():
+#     file = open("info.txt", "r", encoding="utf-8")
+#     for line in file.readlines():
+#         yield line
+#     file.close()
+# def read_file2():
+#     file = open("info.txt", "r", encoding="utf-8")
+#     line = file.readline()
+#     while line:
+#         line = file.readline()
+#         yield line
+# def read_file3():
+#     file = open("info.txt", "r", encoding="utf-8")
+#
+#     while line := file.readline():
+#         print(repr(line))
 
 # read_file3()
 
@@ -53,19 +66,20 @@ def read_file3():
 #     def __exit__(self): ...
 
 
-# with open("message.txt") as file:
+
+# with open("message.txt", "r") as file:
 #     data = file.read()
 #     ...
 #     ...
 #
-mgr = open("message.txt")
-file = mgr.__enter__()
-try:
-    data = file.read()
-    ...
-    ...
-finally:
-    mgr.__exit__(None, None, None)
+# mgr = open("message.txt", "r")
+# file = mgr.__enter__()
+# try:
+#     data = file.read()
+#     ...
+#     ...
+# finally:
+#     mgr.__exit__(None, None, None)
 
 class IgnoreError:
     def __enter__(self):
@@ -76,9 +90,10 @@ class IgnoreError:
         return True
 
 
-# with IgnoreError() as ignored:
-#     print(1/0)
-# print("Didn't crash")
+with IgnoreError() as ignored:
+    print(1/0)
+
+print("Didn't crash")
 
 #
 # with open("file.bin", "wb") as f:
@@ -118,8 +133,6 @@ def write_image(binary_data, output_path):
 import os
 import shutil
 
-
-
 def create_files(dest: str, amount: int):
     if not os.path.exists(dest):
         os.mkdir(dest)
@@ -129,7 +142,7 @@ def create_files(dest: str, amount: int):
             file.write(str(i))
 
 
-# create_files("data", 100)
+create_files("data", 100)
 # os.makedirs('path/1/a/z')
 # os.makedirs('path/1/b/x')
 # os.makedirs('path/2/a/c')
@@ -146,17 +159,17 @@ def create_files(dest: str, amount: int):
 
 import pickle
 
-# user = {
-#     "name": "Bob",
-#     "age": 18
-# }
+user = {
+    "name": "Bob",
+    "age": 18
+}
 
-# with open("obj.pkl", "wb") as file:
-#     pickle.dump(user, file)
+with open("obj.pkl", "wb") as file:
+    pickle.dump(user, file)
 
-
-with open("obj.pkl", "rb") as file:
-    obj: dict = pickle.load(file)
+#
+# with open("obj.pkl", "rb") as file:
+#     obj: dict = pickle.load(file)
 
 # print(obj)
 
@@ -185,5 +198,5 @@ def sort_folder_data(dest: str):
                 )
 
 
-sort_folder_data("C:\\Users\\admin\\Downloads")
+# sort_folder_data("C:\\Users\\admin\\Downloads")
 
