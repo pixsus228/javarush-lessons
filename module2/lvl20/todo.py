@@ -16,17 +16,19 @@ if not DB_URI:
     raise ValueError("DB_URI environment variable is not set")
     
 
+a = """
+CREATE TABLE IF NOT EXISTS tasks (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    is_done BOOLEAN DEFAULT FALSE
+)
+"""
+
 
 def create_tables(conn: Connection):
     # Tasks table
     with conn.cursor() as cur:
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS tasks (
-                id SERIAL PRIMARY KEY,
-                title VARCHAR(255) NOT NULL,
-                is_done BOOLEAN DEFAULT FALSE
-            )
-        """)
+        cur.execute(a)
 
 
 def add_task(conn: Connection, title: str) -> None:
