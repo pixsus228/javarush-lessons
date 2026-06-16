@@ -20,6 +20,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
+    is_featured = models.BooleanField(default=False)
 
     # Relationships
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
