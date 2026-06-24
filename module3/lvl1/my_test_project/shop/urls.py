@@ -1,16 +1,26 @@
 from django.urls import path, re_path
 
-from . import views
+from .views import (
+    HomeView,
+    ArticleView,
+    PostView,
+
+    year_archive,
+    article_detail
+)
 
 app_name = "shop"
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', HomeView.as_view(), name='home'),
 
     # ПОРЯДОК ВАЖЛИВИЙ
-    path('articles/500', views.my_article_detail, name='about'),
-    path('articles/<int:pk>', views.article_detail, name='about'),
+    path('articles/', ArticleView.as_view(), name='articles'),
+    path('articles/<int:pk>', article_detail, name='articles_detail'),
 
-    re_path(r'^articles/(?P<year>[0-9]{4})/$', views.year_archive),
+    # posts
+    path('posts/', PostView.as_view(), name="posts"),
+
+    re_path(r'^articles/(?P<year>[0-9]{4})/$', year_archive),
     # re_path(r'^articles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.month_archive)
 ]
