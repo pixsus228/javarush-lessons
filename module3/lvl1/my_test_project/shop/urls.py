@@ -1,7 +1,7 @@
 from django.urls import path, re_path
 
 from .views import (
-    HomeView,
+    home,
     ArticleView,
     PostView,
 
@@ -12,7 +12,8 @@ from .views import (
 app_name = "shop"
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
+    # path('', HomeView.as_view(), name='home'),
+    path('', home, name='home'),
 
     # ПОРЯДОК ВАЖЛИВИЙ
     path('articles/', ArticleView.as_view(), name='articles'),
