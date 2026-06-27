@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    hello
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+    <h1>Привіт, {{ request.user.username }}</h1>
+{% else %}
+    <h1>Ти не зареєстрований!</h1>
+{% endif %}
+
+{% for article in articles %}
+    <a href="{% url 'shop:articles_detail' article.id %}">{{ article.name | default:"Невідомо" | upper | safe }}</a>
+{% empty %}
+    <h1>Список пустий!</h1>
+{% endfor %}
+
+Фрукти: {{ lst }}
+
+{% endblock %}
+
+

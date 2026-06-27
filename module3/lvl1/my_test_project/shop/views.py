@@ -5,23 +5,30 @@ from django.views.generic import TemplateView, DetailView, ListView, View
 from .models import Post, Category
 
 
-class HomeView(TemplateView):
-    template_name = "shop/home.html"
+# class HomeView(TemplateView):
+#     template_name = "shop/home.html"
+
+articles = [
+    {"id": 1, "name": ""},
+    {"id": 2, "name": "<h5>Article2</h5>"},
+    {"id": 3, "name": "Article3"},
+    {"id": 4, "name": "Article4"},
+]
 
 
 def home(request: HttpRequest):
-    return render(request, "index.html", context={
-        "item_name": item.name # {{ item_name }} в html
-    })
-    print(request.GET)
+    context = {
+        "test_var": "hello world!",
+        "articles": articles,
+        "lst": ["apple", ]
+    }
 
-    return HttpResponse(f"<b>Home</b>")
 
-    if "success":
-        redirect("shop:home")
+    return render(request, "shop/index.html", context)
 
 def article_detail(request: HttpRequest, pk: int):
-    return HttpResponse(f"<b>Стаття: {pk}</b>")
+    article= next(x for x in articles if x["id"] == pk)
+    return render(request, "article_detail.html", {"article": article})
 
 
 def my_article_detail(request: HttpRequest):

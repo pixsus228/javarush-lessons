@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="{% url 'shop:home' %}">Назад</a>
+    <h1>Стаття: {{ article.name | default:"Невідомо" }}</h1>
+</body>
+</html>
