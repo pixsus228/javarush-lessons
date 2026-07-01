@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    # null - NULL значення в SQL
+    # blank - пуста строка
+    description = models.TextField(null=True, blank=True)
     slug = models.SlugField(unique=True)
 
     class Meta:
@@ -17,9 +20,11 @@ class Post(models.Model):
     # Core Fields
     title = models.CharField(max_length=200)
     content = models.TextField()
+    picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
 
     # Relationships
@@ -31,3 +36,4 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
